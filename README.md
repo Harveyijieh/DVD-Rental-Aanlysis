@@ -1,59 +1,68 @@
 # DVD Rental Aanlysis 🎬 📊
 
 ### Project Overview
-The DVD Rental Database is a widely used dataset for learning database management and SQL analytics. This project aims to extract actionable insights from the database by leveraging PostgreSQL for data querying and Tableau for data visualization. By analyzing rental trends, customer behavior, and revenue performance, we can make strategic business recommendations to enhance operations and profitability.
-
-This analysis covers various aspects, including customer spending habits, rental trends over time, and the financial performance of different movie categories. The insights derived will help in optimizing inventory management, improving customer engagement, and identifying potential areas for revenue growth.
-
-Additionally, this project serves as a demonstration of data analytics skills, including:
+The DVD Rental Database is a widely used dataset for learning database management and SQL analytics. This project aims to extract actionable insights from the database by leveraging PostgreSQL for data querying and PowerBI for data visualization. By analyzing rental trends, customer behavior, and revenue performance, we can make strategic business recommendations to enhance operations and profitability. This analysis covers various aspects, including customer spending habits, rental trends over time, and the financial performance of different movie categories. The insights derived will help in optimizing inventory management, improving customer engagement, and identifying potential areas for revenue growth. Additionally, this project serves as a demonstration of data analytics skills, including:
 
 - Database querying with SQL
 
-- Data visualization using Tableau
+- Data visualization using PowerBI
 
-Business intelligence reporting
-
-ETL (Extract, Transform, Load) processes for data preparation
-
-GitHub documentation for showcasing technical projects
+- Business intelligence reporting
 
 By the end of this project, stakeholders will have a better understanding of the key drivers behind the business performance of a DVD rental store, enabling them to make data-driven decisions that improve customer satisfaction and financial outcomes.
-
-This project analyzes the DVD Rental Database to extract valuable business insights. Using PostgreSQL for querying, Tableau for visualization, and GitHub for documentation, we uncover trends in revenue, customer behavior, rental patterns, and movie performance.
 
 ### Dataset Description 
 The dataset comes from a PostgreSQL database (dvdrental) containing data on:
 
 - Customers and payments
-
 - Movies and categories
-
 - Rentals and inventory
-
 - Stores and staff
 
-### Key Analysis Objectives
-We aim to answer the following business questions:
+## Approach 
 
-1. Customer & Sales Insights
+### Ubderstanding the Business Problem
+The aim is to answer the following business questions:
 
-    - Who are the top spending customers?
-    - Which cities generate the most revenue?
-    - What are the most rented movie genres?
+The goal of this project is to analyze the **dvdrental** database to uncover insights that can help optimize business decisions. We aim to answer key questions such as:  
+- What movie categories generate the most revenue?  
+- Who are the highest-paying customers?  
+- What time of day do most rentals occur?
+- Which cities generate the most revenue?
+- What are the most rented movie genres?
+- What are the most rented movies?
+- How does revenue differ between store locations?
 
-2. Rental Trends & Patterns
+### Defining Key Metrics  
+To achieve this, we focus on the following key performance indicators (KPIs):  
+- **Total Revenue** (sum of `amount` from the `payment` table)  
+- **Most Popular Movie Categories** (count of rentals per category)  
+- **Peak Rental Hours** (rental transactions grouped by hour of the day)
 
-    - What are the peak rental hours?
-    - How long do customers typically rent movies?
-    - What are the most rented movies?
+### Extracting Data Using SQL  
+We wrote SQL queries to retrieve data from the **dvdrental** database, using `JOINs` across multiple tables like:  
+- `payment` (for revenue analysis)  
+- `rental` (for rental trends)  
+- `customer` (for customer insights)  
+- `film_category` (for genre-based analysis)
 
-3. Financial & Revenue Analysis
+### Data Cleaning & Preprocessing  
+"Since dvdrental is a predefined PostgreSQL sample database, it is structured with clean, well-organized data. There are no missing values in key transactional tables such as `rental`, `payment`, and `customer`. Additionally, foreign key constraints prevent orphaned records, ensuring data consistency. Therefore, minimal preprocessing was required before analysis."
 
-    - How does revenue trend over time?
-    - What percentage of revenue comes from late fees?
-    - How does revenue differ between store locations?
+### 5️⃣ Data Analysis & Visualization  
+Using **Tableau**, we created dashboards for:  
+📊 **Revenue Trends** (Month-over-month revenue changes)  
+🎭 **Top Movie Categories** (Most rented movie genres)  
+👤 **Customer Insights** (Top-paying customers)  
+⏳ **Peak Rental Hours** (When most rentals occur) 
 
 
+### 6️⃣ Insights & Recommendations  
+Based on our analysis, we recommend:  
+- Increasing inventory for **Action & Comedy** movies since they generate the most revenue  
+- Offering targeted promotions to **top 10 highest-paying customers**  
+- Extending rental store hours to cater to **evening peak demand (6-9 PM)**  
+Link  to [Power BI Dashboard](http://jdj)
 
 
 📦 DVD-Rental-Analysis
