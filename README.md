@@ -47,12 +47,14 @@ We wrote SQL queries to retrieve data from the **dvdrental** database, using `JO
 ### Data Cleaning & Preprocessing  
 "Since dvdrental is a predefined PostgreSQL sample database, it is structured with clean, well-organized data. There are no missing values in key transactional tables such as `rental`, `payment`, and `customer`. Additionally, foreign key constraints prevent orphaned records, ensuring data consistency. Therefore, minimal preprocessing was required before analysis."
 
-### Data Analysis & Visualization  work on this
-Using **Tableau**, we created dashboards for:  
+### Data Analysis and Visualization   
 📊 **Revenue Trends** (Month-over-month revenue changes)  
 🎭 **Top Movie Categories** (Most rented movie genres)  
 👤 **Customer Insights** (Top-paying customers)  
 ⏳ **Peak Rental Hours** (When most rentals occur) 
+
+Using **powerBI**, to create visualisation for the Dashbiard:
+[View Power BI Dashboard](http://example)
 
 Key Findings and Insights
 - Top Customer: The highest-spending customer spent over $200 on rentals.
@@ -66,11 +68,6 @@ Based on our analysis, we recommend:
 - Increasing inventory for **Action & Comedy** movies since they generate the most revenue  
 - Offering targeted promotions to **top 10 highest-paying customers**  
 - Extending rental store hours to cater to **evening peak demand (6-9 PM)**  
-Link  to [Power BI Dashboard](http://example)
 
-### 📬 Contact & Contribution
-- 👤 Your Name
-- 📧 [Your Email]
-- 🔗 [Your LinkedIn/GitHub]
 
 📦 DVD-Rental-Analysis
