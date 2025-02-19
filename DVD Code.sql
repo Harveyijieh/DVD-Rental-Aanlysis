@@ -1,89 +1,153 @@
 -- DVD Rental Analysis
 -- Harvey Ijieh
-
 -- 
 -- Check for NULL values in the customer table
-SELECT * FROM customer 
-WHERE first_name IS NULL OR last_name IS NULL OR email IS NULL;
+SELECT
+	*
+FROM
+	CUSTOMER
+WHERE
+	FIRST_NAME IS NULL
+	OR LAST_NAME IS NULL
+	OR EMAIL IS NULL;
 
 -- Check for NULL values in the payment table
-SELECT * FROM payment 
-WHERE amount IS NULL OR payment_date IS NULL;
+SELECT
+	*
+FROM
+	PAYMENT
+WHERE
+	AMOUNT IS NULL
+	OR PAYMENT_DATE IS NULL;
 
 -- Check for NULL values in the rental table
-SELECT * FROM rental 
-WHERE rental_date IS NULL OR inventory_id IS NULL OR customer_id IS NULL;
-
+SELECT
+	*
+FROM
+	RENTAL
+WHERE
+	RENTAL_DATE IS NULL
+	OR INVENTORY_ID IS NULL
+	OR CUSTOMER_ID IS NULL;
 
 -- Top spending customers
-SELECT c.customer_id, c.first_name, c.last_name, SUM(p.amount) AS total_spent
-FROM payment p
-JOIN customer c ON p.customer_id = c.customer_id
-GROUP BY c.customer_id
-ORDER BY total_spent DESC
-LIMIT 10;
+SELECT
+	C.CUSTOMER_ID,
+	C.FIRST_NAME,
+	C.LAST_NAME,
+	SUM(P.AMOUNT) AS TOTAL_SPENT
+FROM
+	PAYMENT P
+	JOIN CUSTOMER C ON P.CUSTOMER_ID = C.CUSTOMER_ID
+GROUP BY
+	C.CUSTOMER_ID
+ORDER BY
+	TOTAL_SPENT DESC
+LIMIT
+	10;
 
 -- Most profitablle cities
-SELECT ct.city, SUM(p.amount) AS total_revenue
-FROM payment p
-JOIN customer c ON p.customer_id = c.customer_id
-JOIN address a ON c.address_id = a.address_id
-JOIN city ct ON a.city_id = ct.city_id
-GROUP BY ct.city
-ORDER BY total_revenue DESC
-LIMIT 10;
+SELECT
+	CT.CITY,
+	SUM(P.AMOUNT) AS TOTAL_REVENUE
+FROM
+	PAYMENT P
+	JOIN CUSTOMER C ON P.CUSTOMER_ID = C.CUSTOMER_ID
+	JOIN ADDRESS A ON C.ADDRESS_ID = A.ADDRESS_ID
+	JOIN CITY CT ON A.CITY_ID = CT.CITY_ID
+GROUP BY
+	CT.CITY
+ORDER BY
+	TOTAL_REVENUE DESC
+LIMIT
+	10;
 
 -- Peak rental hours
-SELECT EXTRACT(HOUR FROM rental_date) AS rental_hour, 
-COUNT(*) AS total_rentals
-FROM rental
-GROUP BY rental_hour
-ORDER BY rental_hour DESC;
+SELECT
+	EXTRACT(
+		HOUR
+		FROM
+			RENTAL_DATE
+	) AS RENTAL_HOUR,
+	COUNT(*) AS TOTAL_RENTALS
+FROM
+	RENTAL
+GROUP BY
+	RENTAL_HOUR
+ORDER BY
+	RENTAL_HOUR DESC;
 
 -- Revenue trend over time
-SELECT	TO_CHAR(DATE_TRUNC('Month', payment_date), 'Month') AS month,
-SUM(amount) AS total_revenue
-FROM payment
-GROUP BY DATE_TRUNC('Month', payment_date)
-ORDER BY EXTRACT(Month FROM DATE_TRUNC('Month', payment_date));
+SELECT
+	TO_CHAR(DATE_TRUNC('Month', PAYMENT_DATE), 'Month') AS MONTH,
+	SUM(AMOUNT) AS TOTAL_REVENUE
+FROM
+	PAYMENT
+GROUP BY
+	DATE_TRUNC('Month', PAYMENT_DATE)
+ORDER BY
+	EXTRACT(
+		MONTH
+		FROM
+			DATE_TRUNC('Month', PAYMENT_DATE)
+	);
 
 -- Tope Rental Movie Category
-select name, count(r.rental_id) AS rental_count
-from category c
-JOIN film_category ct ON c.category_id = ct.category_id
-JOIN film f ON ct.film_id = f.film_id
-JOIN inventory i ON f.film_id = i.film_id
-JOIN rental r ON i.inventory_id = r.inventory_id
-GROUP BY c.name
-ORDER BY  rental_count DESC;
+SELECT
+	NAME,
+	COUNT(R.RENTAL_ID) AS RENTAL_COUNT
+FROM
+	CATEGORY C
+	JOIN FILM_CATEGORY CT ON C.CATEGORY_ID = CT.CATEGORY_ID
+	JOIN FILM F ON CT.FILM_ID = F.FILM_ID
+	JOIN INVENTORY I ON F.FILM_ID = I.FILM_ID
+	JOIN RENTAL R ON I.INVENTORY_ID = R.INVENTORY_ID
+GROUP BY
+	C.NAME
+ORDER BY
+	RENTAL_COUNT DESC;
 
 -- Revenue by category
-SELECT c.name AS category, SUM(p.amount) AS total_revenue
-FROM payment p
-JOIN rental r ON p.rental_id = r.rental_id
-JOIN inventory i ON r.inventory_id = i.inventory_id
-JOIN film f ON i.film_id = f.film_id
-JOIN film_category fc ON f.film_id = fc.film_id
-JOIN category c ON fc.category_id = c.category_id
-GROUP BY c.name
-ORDER BY total_revenue DESC;
+SELECT
+	C.NAME AS CATEGORY,
+	SUM(P.AMOUNT) AS TOTAL_REVENUE
+FROM
+	PAYMENT P
+	JOIN RENTAL R ON P.RENTAL_ID = R.RENTAL_ID
+	JOIN INVENTORY I ON R.INVENTORY_ID = I.INVENTORY_ID
+	JOIN FILM F ON I.FILM_ID = F.FILM_ID
+	JOIN FILM_CATEGORY FC ON F.FILM_ID = FC.FILM_ID
+	JOIN CATEGORY C ON FC.CATEGORY_ID = C.CATEGORY_ID
+GROUP BY
+	C.NAME
+ORDER BY
+	TOTAL_REVENUE DESC;
 
 -- Revenue by ratings
-SELECT f.rating AS movie_rating, SUM(p.amount) AS total_revenue
-FROM payment p
-JOIN rental r ON p.rental_id = r.rental_id
-JOIN inventory i ON r.inventory_id = i.inventory_id
-JOIN film f ON i.film_id = f.film_id
-GROUP BY f.rating
-ORDER BY total_revenue DESC;
+SELECT
+	F.RATING AS MOVIE_RATING,
+	SUM(P.AMOUNT) AS TOTAL_REVENUE
+FROM
+	PAYMENT P
+	JOIN RENTAL R ON P.RENTAL_ID = R.RENTAL_ID
+	JOIN INVENTORY I ON R.INVENTORY_ID = I.INVENTORY_ID
+	JOIN FILM F ON I.FILM_ID = F.FILM_ID
+GROUP BY
+	F.RATING
+ORDER BY
+	TOTAL_REVENUE DESC;
 
 --Revenue by country
-SELECT co.country, SUM(p.amount) AS total_revenue
-FROM payment p
-JOIN customer c ON p.customer_id = c.customer_id
-JOIN address a ON c.address_id = a.address_id
-JOIN city ci ON a.city_id = ci.city_id
-JOIN country co ON ci.country_id = co.country_id
-GROUP BY co.country
-ORDER BY total_revenue DESC;
-
+SELECT
+	CO.COUNTRY,
+	SUM(P.AMOUNT) AS TOTAL_REVENUE
+FROM
+	PAYMENT P
+	JOIN CUSTOMER C ON P.CUSTOMER_ID = C.CUSTOMER_ID
+	JOIN ADDRESS A ON C.ADDRESS_ID = A.ADDRESS_ID
+	JOIN CITY CI ON A.CITY_ID = CI.CITY_ID
+	JOIN COUNTRY CO ON CI.COUNTRY_ID = CO.COUNTRY_ID
+GROUP BY
+	CO.COUNTRY
+ORDER BY
+	TOTAL_REVENUE DESC;
