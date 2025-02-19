@@ -54,7 +54,7 @@ We wrote SQL queries to retrieve data from the **dvdrental** database, using `JO
 ⏳ **Peak Rental Hours** (When most rentals occur) 
 
 Using **powerBI**, to create visualisation for the Dashbiard:
-[View Power BI Dashboard](http://example)
+[View Power BI Dashboard](http://loading)
 
 Key Findings and Insights
 - Top Customer: The highest-spending customer spent over $200 on rentals.
